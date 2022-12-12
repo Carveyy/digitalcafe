@@ -1,0 +1,32 @@
+{% include "header.html" %}
+<h1> Order History </h1>
+
+    {% if session["user"] is defined %}
+    <table>
+        <tr>
+            <th>Date</th>
+            <th>Code</th>
+            <th>Name</th>
+            <th>Quantity</th>
+            <th>Subtotal</th>
+        </tr>
+    
+    {% for item in orders%}
+    {% for detail in item["details"]%}
+        <tr>
+            <td>{{ item["orderdate"] }}</td> 
+            <td>{{ detail["code"] }}</td>
+            <td>{{ detail["name"] }}</td>
+            <td>{{ detail["qty"] }}</td>
+            <td>{{ detail["subtotal"] }}</td>
+        </tr>
+    {% endfor %}
+    {% endfor %}
+    </table>
+
+    {% else %}
+    <div>Your Order History Is Empty, Order Your First Item <a href=products.html> Here! </a></div> 
+    {% endif %}
+
+{% include "footer.html" %}
+
